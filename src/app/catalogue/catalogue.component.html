@@ -1,0 +1,46 @@
+
+
+<h2>Catálogo</h2>
+<p>ACME te acompaña con todos los produtos que necesitas</p>
+
+<input type="hidden" #selection>
+
+<div class="card-container">
+  
+  
+  <div *ngFor="let pro of products"  
+      class="card card-small" (click)="selection.value = 'component'" tabindex="0">
+      <div [ngStyle]="{'background-color': pro.quantity > 0? '#E8E8E8' : 'white'}">
+        <h6>{{pro.type}} </h6>
+        <div>
+          <img [src]="pro.imageLink" width="100" height="100" >
+        </div>      
+        <div>
+          <div><span>sku: </span>{{pro.id}}</div>
+          <div><span>Tipo: </span>{{pro.type}}</div>
+          <div><span>Descripción: </span>{{pro.description}}</div>
+          <div><span>Precio: $</span>{{pro.price}} CLP</div>
+        </div>
+        <div *ngIf="pro.quantity > 0"><span>Unidades: </span>
+          <input type="number" [(ngModel)]="pro.quantity" placeholder="Lala"  min="0" max="100">
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary" 
+          (click)="addProduct(pro)">Agregar</button>
+        </div>
+      </div>
+  </div>
+
+</div>
+<br><br>
+<div class="card-container">
+  <div *ngIf="selectedProduct" class="card card-small">
+    <h5>Tu último producto agregado es</h5>
+    <div><span>Id: </span>{{selectedProduct.id}}</div>
+    <div><span>Tipo: </span>{{selectedProduct.type}}</div>
+    <div><span>Descripción: </span>{{selectedProduct.description}}</div>
+    <div><span>Precio: </span>{{selectedProduct.price}}</div>
+    <div><img [src]="selectedProduct.imageLink" width="100" height="100" ></div>
+  </div>
+</div>
+

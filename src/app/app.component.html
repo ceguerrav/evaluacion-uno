@@ -1,0 +1,51 @@
+
+  <!-- Toolbar -->
+  <div class="toolbar" role="banner">
+    <h1>{{ title }}</h1>
+  </div>
+
+  <div class="jumbotron " role="main">
+
+    <app-login-form (sendHiddenContent)="getHiddenCatalogue($event)" >    
+    </app-login-form>
+
+    <app-catalogue  [hidden]="hiddenContent" 
+                    (addedProduct)="onAddedProducts($event)">
+    </app-catalogue>
+    
+    
+    <div  [hidden]="hiddenContent"  class="card-container">
+      <h2>Elementos de tu carrito</h2>
+      <p>En esta lista encontraras los productos que debes pagar, al termino de tu compra</p>
+      
+      <input type="hidden" #selection>
+    
+        <div *ngFor="let pro of shoppingProducts"  
+              class="card card-small" (click)="selection.value = 'component'" tabindex="0">
+              <h6>{{pro.type}} </h6>
+              <div>
+                <img [src]="pro.imageLink" width="100" height="100" >
+              </div>      
+              <div>
+                <div><span>sku: </span>{{pro.id}}</div>
+                <div><span>Tipo: </span>{{pro.type}}</div>
+                <div><span>Descripción: </span>{{pro.description}}</div>
+                <div><span>Precio: $</span>{{pro.price}} CLP</div>
+              </div>
+              <div>
+            <div>
+              <button type="submit" class="btn btn-primary"
+                (click)="deleteRow(pro)">Quitar</button>
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+    
+    </footer>
+
+  </div>
+
+<router-outlet></router-outlet>
